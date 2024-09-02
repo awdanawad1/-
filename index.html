@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فتح وإغلاق 100 نافذة على Google</title>
+</head>
+<body>
+    <button id="openWindowsBtn">افتح 100 نافذة على Google</button>
+
+    <script>
+        document.getElementById('openWindowsBtn').addEventListener('click', function() {
+            var totalWindows = 100;
+            var batchSize = 5; // عدد النوافذ التي يتم فتحها في كل دفعة
+            var delay = 10000; // تأخير بين دفعة وأخرى (بالمللي ثانية)
+            var windows = [];
+            var opened = 0;
+
+            // دالة لفتح النوافذ في دفعات
+            function openBatch(start) {
+                var end = Math.min(start + batchSize, totalWindows);
+                for (var i = start; i < end; i++) {
+                    // فتح نافذة جديدة على Google
+                    var newWindow = window.open('https://t.ajrkm3.com/338035/8865/33286?bo=2779,2778,2777,2776,2775&po=6533&aff_sub5=SF_006OG000004lmDN', '_blank', 'width=600,height=400');
+                    windows.push(newWindow);
+                }
+                if (end < totalWindows) {
+                    // فتح الدفعة التالية بعد تأخير
+                    setTimeout(function() {
+                        openBatch(end);
+                    }, delay);
+                } else {
+                    // إغلاق جميع النوافذ بعد فترة قصيرة
+                    setTimeout(function() {
+                        for (var j = 0; j < windows.length; j++) {
+                            try {
+                                if (windows[j] && !windows[j].closed) {
+                                    windows[j].close();
+                                }
+                            } catch (e) {
+                                console.error('فشل في إغلاق النافذة:', e);
+                            }
+                        }
+                    }, 3000); // 3000 مللي ثانية = 3 ثوانٍ
+                }
+            }
+
+            // بدء فتح النوافذ
+            openBatch(0);
+        });
+    </script>
+</body>
+</html>
